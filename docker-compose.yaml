@@ -1,7 +1,7 @@
 x-service-backend-common: &service-backend-common
   build:
     dockerfile: Dockerfile
-    context: ./backend  # Изменено с /backend на ./backend для корректного пути
+    context: ./backend
   restart: always
   env_file:
     - .env
@@ -38,6 +38,17 @@ services:
     hostname: backend2
     ports:
       - "12346:12321"
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - main_network
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
 networks:
   main_network:
