@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-import socket
 from settings import settings
+from apps.info.router import info_router
 
 def get_application() -> FastAPI:
 
@@ -10,8 +10,7 @@ def get_application() -> FastAPI:
         title = settings.APP_NAME,
     )
 
-    @app.get("/info")
-    async def get_backend():
-        return {"backend": socket.gethostname()}
+    if settings.DEBUG:
+        app.include_router(info_router, prefix="/info", tags=["Info"])
 
     return app
