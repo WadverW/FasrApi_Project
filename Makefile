@@ -1,4 +1,5 @@
 DC = docker compose
+BACKEND_CONTAINER = backend1
 
 .PHONY: up
 up:
@@ -23,3 +24,7 @@ stop:
 .PHONY: restart
 restart:
 	${DC} down && ${DC} up
+
+.PHONY: bash
+bash:
+	${DC} exec -it ${BACKEND_CONTAINER} bash
