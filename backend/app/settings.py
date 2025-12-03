@@ -20,6 +20,8 @@ class PostgresSettings(BaseSettings):
         "case_sensitive": False,
     }
 
+
+    @property
     def DATABASE_ASYNC_URL(self) -> str:
         return (f"postgresql+asyncpg://{self.PGUSER}:{self.PGPASSWORD}@"
                 f"{self.PGHOST}:{self.PGPORT}/{self.PGDATABASE}")
