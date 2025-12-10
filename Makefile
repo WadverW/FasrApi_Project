@@ -28,3 +28,8 @@ restart:
 .PHONY: bash
 bash:
 	${DC} exec -it ${BACKEND_CONTAINER} bash
+
+.PHONY: build up rebuild
+rebuild:
+	docker compose build --no-cache
+	docker compose up -d
